@@ -1,6 +1,13 @@
 import { BrowserRouter, Routes , Route} from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
+import Home from './pages/public/Home';
+import Courses from './pages/public/Courses';
+import Faculty from './pages/public/Faculty';
+import TrialClasses from './pages/public/TrialClasses';
+import BatchSchedule from './pages/public/BatchSchedule';
+import EnrollmentForm from './pages/public/EnrollmentForm';
+
 
 const App = ()=> {
   return (
@@ -11,12 +18,12 @@ const App = ()=> {
 
         <main className="flex-1">
           <Routes>
-            <Route path="/" element={<div className="p-8 text-2x1">Home Page</div>} />
-            <Route path="/courses" element={<div className="p-8 text-2x1">Courses Page</div>} />
-            <Route path="/faculty" element={<div className="p-8 text-2x1">Faculty Page</div>} />
-            <Route path="/trial-classes" element={<div className="p-8 text-2x1">Trial Classes Page</div>} />
-            <Route path="/batches" element={<div className="p-8 text-2x1">Batch Schedule Page</div>} />
-            <Route path="/enroll" element={<div className="p-8 text-2x1">Enrollment Form Page</div>} />
+            <Route path="/" element={<Home />} />
+            <Route path="/courses" element={<Courses />} />
+            <Route path="/faculty" element={<Faculty />} />
+            <Route path="/trial-classes" element={<TrialClasses/>} />
+            <Route path="/batches" element={<BatchSchedule />} />
+            <Route path="/enroll" element={<EnrollmentForm/>} />
           </Routes>
         </main>
 
