@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
+import AdminLayout from './components/layout/AdminLayout'
 import ProtectedRoute from './components/common/ProtectedRoute'
 
 import Home from './pages/public/Home'
@@ -14,41 +15,86 @@ import Login from './pages/admin/Login'
 import Dashboard from './pages/admin/Dashboard'
 import Unauthorized from './pages/admin/Unauthorized'
 
+//Wrapper for public pages
+const PublicLayout = ({ children }) => (
+  <div className="min-h-screen flex flex-col">
+    <Navbar />
+    <main className="flex-1">{children}</main>
+    <Footer />
+  </div>
+)
+
 const App = () => {
   return (
     <BrowserRouter>
-      <div className="min-h-screen flex flex-col">
-        <Navbar />
+      <Routes>
+        {/* Public Routes */}
 
-        <main className="flex-1">
-          <Routes>
-            {/* Public Routes */}
+        <Route
+          path="/"
+          element={
+            <PublicLayout>
+              <Home />
+            </PublicLayout>
+          }
+        />
+        <Route
+          path="/courses"
+          element={
+            <PublicLayout>
+              <Courses />
+            </PublicLayout>
+          }
+        />
+        <Route
+          path="/faculty"
+          element={
+            <PublicLayout>
+              <Faculty />
+            </PublicLayout>
+          }
+        />
+        <Route
+          path="/trial-classes"
+          element={
+            <PublicLayout>
+              <TrialClasses />
+            </PublicLayout>
+          }
+        />
+        <Route
+          path="/batches"
+          element={
+            <PublicLayout>
+              <BatchSchedule />
+            </PublicLayout>
+          }
+        />
+        <Route
+          path="/enroll"
+          element={
+            <PublicLayout>
+              <EnrollmentForm />
+            </PublicLayout>
+          }
+        />
 
-            <Route path="/" element={<Home />} />
-            <Route path="/courses" element={<Courses />} />
-            <Route path="/faculty" element={<Faculty />} />
-            <Route path="/trial-classes" element={<TrialClasses />} />
-            <Route path="/batches" element={<BatchSchedule />} />
-            <Route path="/enroll" element={<EnrollmentForm />} />
+        {/* Auth Routes */}
+        <Route path="/admin/login" element={<Login />} />
+        <Route path="/unauthorized" element={<Unauthorized />} />
 
-            {/* Auth Routes */}
-            <Route path="/admin/login" element={<Login />} />
-            <Route path="/unauthorized" element={<Unauthorized />} />
-
-            {/* Protected Routes */}
-            <Route
-              path="/admin/dashboard"
-              element={
-                <ProtectedRoute allowedRoles={['admin', 'staff']}>
-                  <Dashboard />
-                </ProtectedRoute>
-              }
-            />
-          </Routes>
-        </main>
-
-        <Footer />
-      </div>
+        {/* Protected Routes */}
+        <Route
+          path="/admin/dashboard"
+          element={
+            <ProtectedRoute allowedRoles={['admin', 'staff']}>
+              <AdminLayout>
+                <Dashboard />
+              </AdminLayout>
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
     </BrowserRouter>
   )
 }
