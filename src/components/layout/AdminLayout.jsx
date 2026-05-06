@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate, Outlet } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
 
-const AdminLayout = ({ children }) => {
+const AdminLayout = () => {
   const { user, logout } = useAuth()
   const location = useLocation()
   const navigate = useNavigate()
@@ -14,7 +14,7 @@ const AdminLayout = ({ children }) => {
   }
 
   const navItems = [
-    { path: '/admin/dasshboard', label: 'Dashboard', icon: '📊' },
+    { path: '/admin/dashboard', label: 'Dashboard', icon: '📊' },
     { path: '/admin/students', label: 'Students', icon: '👨‍🎓' },
     { path: '/admin/courses', label: 'Courses', icon: '📚' },
     { path: '/admin/payments', label: 'Payments', icon: '💰' },
@@ -140,7 +140,9 @@ const AdminLayout = ({ children }) => {
         </header>
 
         {/* Page content */}
-        <main className="flex-1 p-8">{children}</main>
+        <main className="flex-1 p-8">
+          <Outlet />
+        </main>
       </div>
     </div>
   )

@@ -13,6 +13,10 @@ import EnrollmentForm from './pages/public/EnrollmentForm'
 
 import Login from './pages/admin/Login'
 import Dashboard from './pages/admin/Dashboard'
+import Students from './pages/admin/Students'
+import CoursesLayout from './pages/admin/CoursesLayout'
+import Enquiries from './pages/admin/Enquiries'
+import Payments from './pages/admin/Payments'
 import Unauthorized from './pages/admin/Unauthorized'
 
 //Wrapper for public pages
@@ -85,15 +89,21 @@ const App = () => {
 
         {/* Protected Routes */}
         <Route
-          path="/admin/dashboard"
+          path="/admin"
           element={
             <ProtectedRoute allowedRoles={['admin', 'staff']}>
-              <AdminLayout>
-                <Dashboard />
-              </AdminLayout>
+              <AdminLayout />
             </ProtectedRoute>
           }
-        />
+        >
+          {/* These render inside <Outlet /> in AdminLayout*/}
+
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="students" element={<Students />} />
+          <Route path="courses" element={<CoursesLayout />} />
+          <Route path="enquiries" element={<Enquiries />} />
+          <Route path="payments" element={<Payments />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   )
