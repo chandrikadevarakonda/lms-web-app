@@ -18,6 +18,7 @@ import CoursesLayout from './pages/admin/CoursesLayout'
 import Enquiries from './pages/admin/Enquiries'
 import Payments from './pages/admin/Payments'
 import Unauthorized from './pages/admin/Unauthorized'
+import Reports from './pages/admin/Reports'
 
 //Wrapper for public pages
 const PublicLayout = ({ children }) => (
@@ -103,6 +104,7 @@ const App = () => {
           <Route path="courses" element={<CoursesLayout />} />
           <Route path="enquiries" element={<Enquiries />} />
           <Route path="payments" element={<Payments />} />
+          <Route path="reports" element={<Reports />} />
         </Route>
       </Routes>
     </BrowserRouter>
